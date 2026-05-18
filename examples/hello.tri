@@ -1,0 +1,11 @@
+# Hello World — TriLang
+# A simple TriLang program that prints "Hello from TriLang!"
+
+func main() {
+    print(72);   # H
+    print(101);  # e
+    print(108);  # l
+    print(108);  # l
+    print(111);  # o
+    print(33);   # !
+}

@@ -4,45 +4,48 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Ternary Eco Lab: mô phỏng CVNSS4.0, Base27, trit packing, BilaTiny VM, TinyLLM và đường triển khai ESP32-S3/FPGA.">
-  <meta name="theme-color" content="#09121f">
-  <title>Ternary Eco · CVNSS4.0 × BilaTiny × Edge AI</title>
+  <meta name="theme-color" content="#050505">
+  <title>TERMINAL // Ternary Eco · CVNSS4.0 × BilaTiny × Edge AI</title>
   <link rel="stylesheet" href="./style.css">
   <script defer src="./assets/cvnss-converter.js"></script>
   <script defer src="./core.js"></script>
   <script defer src="./app.js"></script>
 </head>
-<body>
+<body class="terminal-theme">
   <a class="skip-link" href="#lab">Chuyển đến phòng thí nghiệm</a>
   <header class="topbar">
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Ternary Eco, về đầu trang">
-        <span class="brandmark" aria-hidden="true">△</span>
-        <span>TERNARY<span class="accent">ECO</span><small>RESEARCH LAB · VIETNAM</small></span>
+        <span class="brandmark" aria-hidden="true">▴</span>
+        <span>TERNARY<span class="accent">ECO</span><small>ROOT / RESEARCH · VIETNAM</small></span>
       </a>
       <nav class="navlinks" aria-label="Điều hướng chính">
-        <a href="#architecture">Kiến trúc</a>
-        <a href="#lab">Mô phỏng</a>
-        <a href="#targets">Thiết bị</a>
-        <a href="#references">Mã nguồn</a>
+        <a href="#architecture"><span aria-hidden="true">01/</span> Kiến trúc</a>
+        <a href="#lab"><span aria-hidden="true">02/</span> Mô phỏng</a>
+        <a href="#targets"><span aria-hidden="true">03/</span> Thiết bị</a>
+        <a href="#references"><span aria-hidden="true">04/</span> Mã nguồn</a>
       </nav>
       <a class="nav-gh" href="https://github.com/xulytiengviet/ternary-eco" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
+  <div class="command-bar" aria-label="Terminal session"><div class="container command-inner"><span class="cmd-prompt">long@ternary-eco<span class="cmd-colon">:</span>~$</span> <span class="cmd-text">./run_lab --cvnss4 --bilatiny --edge-ai</span><span class="session-status"><span class="session-led" aria-hidden="true"></span> LOCAL SESSION</span></div></div>
+
   <main id="top">
     <section class="hero container">
       <div class="hero-main">
-        <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> OPEN RESEARCH · TRIT-NATIVE LOGIC ON BINARY HARDWARE</div>
-        <h1>Hệ sinh thái<br><span>điện toán tam phân.</span></h1>
+        <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> <span class="prompt-prefix">[BOOT_OK]</span> TERNARY RESEARCH TERMINAL / V1.0</div>
+        <h1><span class="hero-command" aria-hidden="true">&gt;_ </span>Hệ sinh thái<br><span>điện toán tam phân<span class="cursor" aria-hidden="true">_</span></span></h1>
         <p class="intro">Từ <strong>tiếng Việt CVNSS4.0</strong> đến <strong>Base‑27</strong>, <strong>BilaScript / BilaTiny</strong>, trọng số AI <strong>−1 · 0 · +1</strong> và thiết kế nhúng <strong>ESP32‑S3 / FPGA</strong>. Một nơi để quan sát, biên dịch thử và kiểm chứng từng lớp.</p>
         <div class="hero-actions">
           <a href="#lab" class="button button-primary">Mở phòng thí nghiệm <span aria-hidden="true">↗</span></a>
           <a href="#architecture" class="button button-ghost">Xem pipeline kiến trúc</a>
         </div>
-        <div class="hero-caveat">Mô phỏng thực thi bằng JavaScript trên phần cứng nhị phân. Không giả định ESP32‑S3 có lệnh máy tam phân hoặc FPGA đã được tổng hợp.</div>
+        <div class="hero-caveat"><span class="warn-prefix">[! NOTICE]</span> Mô phỏng thực thi bằng JavaScript trên phần cứng nhị phân. Không giả định ESP32‑S3 có lệnh máy tam phân hoặc FPGA đã được tổng hợp.</div>
       </div>
       <div class="hero-art" aria-label="Hình minh họa ba trạng thái trit">
-        <div class="art-head"><span>TRIT STATE / BALANCED LOGIC</span><span class="art-pulse">● SIMULATION</span></div>
+        <div class="terminal-title"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-path">~/ternary-eco/monitor.trit</span><span class="terminal-title-state">RUNNING</span></div>
+        <div class="art-head"><span><span class="log-index">[01]</span> TRIT STATE / BALANCED LOGIC</span><span class="art-pulse">● LIVE SIMULATION</span></div>
         <div class="tri-axis">
           <div class="tri-node tri-neg"><span class="tri-sign">−1</span><small>NEGATIVE</small></div>
           <div class="tri-node tri-zero"><span class="tri-sign">0</span><small>NEUTRAL</small></div>
@@ -51,20 +54,21 @@
         <div class="signals" aria-hidden="true">
           <i style="--h:45%"></i><i style="--h:84%"></i><i style="--h:30%"></i><i style="--h:100%"></i><i style="--h:58%"></i><i style="--h:22%"></i><i style="--h:68%"></i><i style="--h:94%"></i><i style="--h:39%"></i><i style="--h:76%"></i><i style="--h:50%"></i><i style="--h:91%"></i><i style="--h:64%"></i><i style="--h:34%"></i><i style="--h:72%"></i><i style="--h:54%"></i><i style="--h:98%"></i><i style="--h:37%"></i>
         </div>
-        <div class="art-foot"><code>27 = 3³</code><span>BASE‑27 → 3 TRITS / SYMBOL</span></div>
+        <div class="art-foot"><code><span class="code-dollar">$</span> 27 = 3³</code><span>BASE‑27 → 3 TRITS / SYMBOL</span></div>
       </div>
     </section>
 
     <section class="container metrics" aria-label="Các con số nền tảng">
-      <div><strong>03</strong><span>Trạng thái / trit</span></div>
-      <div><strong>27</strong><span>A–Z + dấu cách</span></div>
-      <div><strong>05</strong><span>Trit / byte đóng gói</span></div>
-      <div><strong>56</strong><span>Nhóm nhập nhằng CVNSS</span></div>
+      <div><small>TRIT_STATES</small><strong>03</strong><span>Trạng thái / trit</span></div>
+      <div><small>BASE_ALPHABET</small><strong>27</strong><span>A–Z + dấu cách</span></div>
+      <div><small>PACK_RATIO</small><strong>05</strong><span>Trit / byte đóng gói</span></div>
+      <div><small>CVNSS_AMBIGUITY</small><strong>56</strong><span>Nhóm nhập nhằng CVNSS</span></div>
     </section>
 
     <section class="section container" id="architecture">
       <div class="section-heading"><div><span class="kicker">01 / SYSTEM ARCHITECTURE</span><h2>Hai luồng dữ liệu. Một nền tảng.</h2></div><p>Tách <b>mã hóa ký tự</b> và <b>toán tử/trọng số AI</b> để tránh nhầm lẫn giữa biểu diễn văn bản, phép tính tam phân và mã máy.</p></div>
       <div class="architecture">
+        <div class="terminal-title architecture-title"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-path">~/pipeline/architecture.graph</span><span class="terminal-title-state">2 CHANNELS</span></div>
         <article class="lane"><div class="lane-label"><span class="lane-bullet blue"></span> LANGUAGE & TOKEN PATH</div>
           <div class="steps">
             <div><small>INPUT</small><b>Tiếng Việt NFC</b><span>Chữ, dấu, ngữ cảnh</span></div><span class="connector">→</span>
@@ -94,6 +98,7 @@
     <section class="section container" id="lab">
       <div class="section-heading"><div><span class="kicker">02 / INTERACTIVE WORKBENCH</span><h2>Ternary Research Playground</h2></div><p>Hoạt động tại trình duyệt, không gửi văn bản hoặc trọng số lên máy chủ. Các phép đo dưới đây là kết quả mô phỏng, không phải benchmark phần cứng.</p></div>
       <div class="lab-frame">
+        <div class="terminal-title lab-title"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="window-path">~/ternary-eco/workbench</span><span class="terminal-title-state">INTERACTIVE / LOCAL</span></div>
         <div class="tabs" role="tablist" aria-label="Chọn thí nghiệm">
           <button id="tab-cvnss" class="tab active" role="tab" data-tab="cvnss" aria-selected="true" aria-controls="panel-cvnss"><span>01</span> CVNSS → Trit</button>
           <button id="tab-packing" class="tab" role="tab" data-tab="packing" aria-selected="false" aria-controls="panel-packing"><span>02</span> Trit Packing</button>
@@ -169,7 +174,7 @@ emit(d);</textarea>
           </div>
         </div>
       </div>
-      <div class="test-strip"><div><strong>Reproducibility / Kiểm chứng</strong><p id="testSummary">Bộ kiểm thử trình duyệt chưa được chạy.</p></div><button id="testBtn" class="button button-ghost compact">Chạy self‑test toàn hệ</button></div>
+      <div class="test-strip"><div><strong><span class="test-prefix">✓</span> Reproducibility / Kiểm chứng</strong><p id="testSummary">Bộ kiểm thử trình duyệt chưa được chạy.</p></div><button id="testBtn" class="button button-ghost compact">Chạy self‑test toàn hệ</button></div>
       <div id="testResults" class="test-results" role="status" aria-live="polite"></div>
     </section>
 
@@ -199,6 +204,6 @@ emit(d);</textarea>
       <div class="related"><span>PROJECT CONNECTIONS</span><a href="https://github.com/xulytiengviet/nhdl" target="_blank" rel="noopener noreferrer">NHDL ↗</a><a href="https://github.com/xulytiengviet/TinyLLM_Vietnamese" target="_blank" rel="noopener noreferrer">TinyLLM Vietnamese ↗</a><a href="https://github.com/xulytiengviet/Tinytrit" target="_blank" rel="noopener noreferrer">Tinytrit ↗</a><a href="https://github.com/xulytiengviet/morsetrit" target="_blank" rel="noopener noreferrer">MorseTrit ↗</a></div>
     </section>
   </main>
-  <footer><div class="container footer-inner"><div><b>△ TERNARY ECO</b><span>CVNSS4.0 · BilaTiny · Edge AI / Research Simulation</span></div><div>Long Ngo · 2026 · <a href="https://github.com/xulytiengviet/ternary-eco/blob/main/LICENSE">MIT (project)</a> · <a href="https://github.com/xulytiengviet/ternary-eco/blob/main/docs/REPRODUCIBILITY.md">Reproducibility</a></div></div></footer>
+  <footer><div class="container footer-inner"><div><b><span class="footer-shell">λ</span> TERNARY ECO</b><span>CVNSS4.0 · BilaTiny · Edge AI / Research Simulation</span></div><div>Long Ngo · 2026 · <a href="https://github.com/xulytiengviet/ternary-eco/blob/main/LICENSE">MIT (project)</a> · <a href="https://github.com/xulytiengviet/ternary-eco/blob/main/docs/REPRODUCIBILITY.md">Reproducibility</a></div></div></footer>
 </body>
 </html>

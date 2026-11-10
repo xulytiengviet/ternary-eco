@@ -4,11 +4,13 @@ on:
     paths:
       - "docs/**"
       - "tests/**"
+      - "hardware/**"
       - ".github/workflows/ternary-lab.yml"
   pull_request:
     paths:
       - "docs/**"
       - "tests/**"
+      - "hardware/**"
       - ".github/workflows/ternary-lab.yml"
   workflow_dispatch:
 jobs:
@@ -28,3 +30,17 @@ jobs:
           node --check docs/assets/cvnss-converter.js
       - name: Self-check CVNSS and reference ternary VM
         run: node --test tests/lab.test.cjs
+      - name: Compile and test portable C11 ESP32-S3 reference
+        run: |
+          cc -std=c11 -Wall -Wextra -Werror -pedantic hardware/esp32s3/ternary_kernel.c hardware/esp32s3/test_kernel.c -o ternary-host-test
+          ./ternary-host-test
+      - name: Install GHDL (VHDL-2008 reference simulator)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ghdl
+      - name: Simulate 9 golden Z3 VHDL cases and invalid trit
+        run: |
+          ghdl -a --std=08 hardware/fpga/trit_add.vhd
+          ghdl -a --std=08 hardware/fpga/tb_trit_add.vhd
+          ghdl -e --std=08 tb_trit_add
+          ghdl -r --std=08 tb_trit_add --assert-level=error --stop-time=120ns

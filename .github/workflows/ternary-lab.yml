@@ -1,0 +1,25 @@
+name: Ternary Eco Lab checks
+on:
+  push:
+    paths:
+      - "docs/**"
+      - "tests/**"
+      - ".github/workflows/ternary-lab.yml"
+  pull_request:
+    paths:
+      - "docs/**"
+      - "tests/**"
+      - ".github/workflows/ternary-lab.yml"
+  workflow_dispatch:
+jobs:
+  reproducibility:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Self-check CVNSS and reference ternary VM
+        run: node --test tests/lab.test.cjs

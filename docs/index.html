@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Ternary Eco Lab: mô phỏng CVNSS4.0, Base27, trit packing, BilaTiny VM, TinyLLM và đường triển khai ESP32-S3/FPGA.">
+  <meta name="theme-color" content="#09121f">
+  <title>Ternary Eco · CVNSS4.0 × BilaTiny × Edge AI</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./assets/cvnss-converter.js"></script>
+  <script defer src="./core.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#lab">Chuyển đến phòng thí nghiệm</a>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Ternary Eco, về đầu trang">
+        <span class="brandmark" aria-hidden="true">△</span>
+        <span>TERNARY<span class="accent">ECO</span><small>RESEARCH LAB · VIETNAM</small></span>
+      </a>
+      <nav class="navlinks" aria-label="Điều hướng chính">
+        <a href="#architecture">Kiến trúc</a>
+        <a href="#lab">Mô phỏng</a>
+        <a href="#targets">Thiết bị</a>
+        <a href="#references">Mã nguồn</a>
+      </nav>
+      <a class="nav-gh" href="https://github.com/xulytiengviet/ternary-eco" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <div class="hero-main">
+        <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> OPEN RESEARCH · TRIT-NATIVE LOGIC ON BINARY HARDWARE</div>
+        <h1>Hệ sinh thái<br><span>điện toán tam phân.</span></h1>
+        <p class="intro">Từ <strong>tiếng Việt CVNSS4.0</strong> đến <strong>Base‑27</strong>, <strong>BilaScript / BilaTiny</strong>, trọng số AI <strong>−1 · 0 · +1</strong> và thiết kế nhúng <strong>ESP32‑S3 / FPGA</strong>. Một nơi để quan sát, biên dịch thử và kiểm chứng từng lớp.</p>
+        <div class="hero-actions">
+          <a href="#lab" class="button button-primary">Mở phòng thí nghiệm <span aria-hidden="true">↗</span></a>
+          <a href="#architecture" class="button button-ghost">Xem pipeline kiến trúc</a>
+        </div>
+        <div class="hero-caveat">Mô phỏng thực thi bằng JavaScript trên phần cứng nhị phân. Không giả định ESP32‑S3 có lệnh máy tam phân hoặc FPGA đã được tổng hợp.</div>
+      </div>
+      <div class="hero-art" aria-label="Hình minh họa ba trạng thái trit">
+        <div class="art-head"><span>TRIT STATE / BALANCED LOGIC</span><span class="art-pulse">● SIMULATION</span></div>
+        <div class="tri-axis">
+          <div class="tri-node tri-neg"><span class="tri-sign">−1</span><small>NEGATIVE</small></div>
+          <div class="tri-node tri-zero"><span class="tri-sign">0</span><small>NEUTRAL</small></div>
+          <div class="tri-node tri-pos"><span class="tri-sign">+1</span><small>POSITIVE</small></div>
+        </div>
+        <div class="signals" aria-hidden="true">
+          <i style="--h:45%"></i><i style="--h:84%"></i><i style="--h:30%"></i><i style="--h:100%"></i><i style="--h:58%"></i><i style="--h:22%"></i><i style="--h:68%"></i><i style="--h:94%"></i><i style="--h:39%"></i><i style="--h:76%"></i><i style="--h:50%"></i><i style="--h:91%"></i><i style="--h:64%"></i><i style="--h:34%"></i><i style="--h:72%"></i><i style="--h:54%"></i><i style="--h:98%"></i><i style="--h:37%"></i>
+        </div>
+        <div class="art-foot"><code>27 = 3³</code><span>BASE‑27 → 3 TRITS / SYMBOL</span></div>
+      </div>
+    </section>
+
+    <section class="container metrics" aria-label="Các con số nền tảng">
+      <div><strong>03</strong><span>Trạng thái / trit</span></div>
+      <div><strong>27</strong><span>A–Z + dấu cách</span></div>
+      <div><strong>05</strong><span>Trit / byte đóng gói</span></div>
+      <div><strong>56</strong><span>Nhóm nhập nhằng CVNSS</span></div>
+    </section>
+
+    <section class="section container" id="architecture">
+      <div class="section-heading"><div><span class="kicker">01 / SYSTEM ARCHITECTURE</span><h2>Hai luồng dữ liệu. Một nền tảng.</h2></div><p>Tách <b>mã hóa ký tự</b> và <b>toán tử/trọng số AI</b> để tránh nhầm lẫn giữa biểu diễn văn bản, phép tính tam phân và mã máy.</p></div>
+      <div class="architecture">
+        <article class="lane"><div class="lane-label"><span class="lane-bullet blue"></span> LANGUAGE & TOKEN PATH</div>
+          <div class="steps">
+            <div><small>INPUT</small><b>Tiếng Việt NFC</b><span>Chữ, dấu, ngữ cảnh</span></div><span class="connector">→</span>
+            <div><small>CONVERT</small><b>CVNSS4.0 v5</b><span>Candidate graph · canonical</span></div><span class="connector">→</span>
+            <div><small>ENCODE</small><b>Base‑27</b><span>A–Z + SPACE → 0…26</span></div><span class="connector">→</span>
+            <div><small>STREAM</small><b>3 trit / ký hiệu</b><span>000…222 ↔ TTT…111</span></div>
+          </div>
+        </article>
+        <article class="lane"><div class="lane-label"><span class="lane-bullet lime"></span> PROGRAM & INFERENCE PATH</div>
+          <div class="steps">
+            <div><small>SOURCE</small><b>BilaScript / BilaTiny</b><span>Typed subset · trit</span></div><span class="connector">→</span>
+            <div><small>COMPILER</small><b>Ternary IR / VM</b><span>Lệnh 4 byte · giáo dục</span></div><span class="connector">→</span>
+            <div><small>MODEL</small><b>Quantized TinyLLM</b><span>Trọng số −1/0/+1</span></div><span class="connector">→</span>
+            <div><small>RUNTIME</small><b>Sparse dot product</b><span>Skip zero · scale</span></div>
+          </div>
+        </article>
+        <div class="convergence"><span>↓</span><strong>REFERENCE BACKENDS</strong><span>↓</span></div>
+        <div class="backend-grid">
+          <article><span class="backend-icon">⌘</span><b>Browser VM</b><small>JavaScript · tái lập tức thì</small><em>Đã mô phỏng</em></article>
+          <article><span class="backend-icon">▣</span><b>ESP32‑S3</b><small>Xtensa · int8 / bit packing</small><em>Reference C · chưa flash</em></article>
+          <article><span class="backend-icon">◇</span><b>FPGA / NHDL</b><small>VHDL‑2008 · GHDL · LUT</small><em>Đặc tả · chưa tổng hợp</em></article>
+        </div>
+      </div>
+      <div class="note"><strong>Phân biệt quan trọng:</strong> 3 trit lưu được 27 ký hiệu, nhưng CVNSS4.0 vẫn có mã nhiều-một. Một pipeline cần lưu metadata bổ sung nếu yêu cầu khôi phục 100% văn bản gốc. Trọng số tam phân cũng không đồng nghĩa với việc CPU có ALU tam phân vật lý.</div>
+    </section>
+
+    <section class="section container" id="lab">
+      <div class="section-heading"><div><span class="kicker">02 / INTERACTIVE WORKBENCH</span><h2>Ternary Research Playground</h2></div><p>Hoạt động tại trình duyệt, không gửi văn bản hoặc trọng số lên máy chủ. Các phép đo dưới đây là kết quả mô phỏng, không phải benchmark phần cứng.</p></div>
+      <div class="lab-frame">
+        <div class="tabs" role="tablist" aria-label="Chọn thí nghiệm">
+          <button id="tab-cvnss" class="tab active" role="tab" data-tab="cvnss" aria-selected="true" aria-controls="panel-cvnss"><span>01</span> CVNSS → Trit</button>
+          <button id="tab-packing" class="tab" role="tab" data-tab="packing" aria-selected="false" aria-controls="panel-packing"><span>02</span> Trit Packing</button>
+          <button id="tab-compiler" class="tab" role="tab" data-tab="compiler" aria-selected="false" aria-controls="panel-compiler"><span>03</span> BilaTiny VM</button>
+          <button id="tab-inference" class="tab" role="tab" data-tab="inference" aria-selected="false" aria-controls="panel-inference"><span>04</span> TinyLLM Weights</button>
+          <button id="tab-device" class="tab" role="tab" data-tab="device" aria-selected="false" aria-controls="panel-device"><span>05</span> Edge Targets</button>
+        </div>
+
+        <div class="lab-panel active" id="panel-cvnss" role="tabpanel" aria-labelledby="tab-cvnss">
+          <div class="panel-title"><h3>Vietnamese → CVNSS4.0 → Base‑27 → Trits</h3><span class="local-badge">BỘ CHUYỂN ĐỔI V5 · THẬT</span></div>
+          <div class="two-col">
+            <div class="input-pane"><label for="vnInput">VĂN BẢN TIẾNG VIỆT</label><textarea id="vnInput" rows="5" spellcheck="false">Xin chào Việt Nam</textarea>
+              <div class="inline-controls"><button class="button button-primary" id="convertBtn">Chuyển đổi & kiểm tra</button><button class="textbutton" id="sampleBtn">Câu mẫu khác ↻</button></div>
+              <p class="hint">Base‑27 demo chỉ nhận A–Z và khoảng trắng sau bước CVNSS; ký tự khác sẽ báo lỗi rõ ràng, không âm thầm xóa bỏ.</p>
+              <div class="sub-divider"></div><label for="inspectInput">KIỂM TRA MỘT MÃ CVNSS (VÍ DỤ: ed)</label>
+              <div class="inline-controls"><input type="text" id="inspectInput" value="ed" maxlength="32" aria-label="Mã CVNSS cần kiểm tra"><button class="button button-ghost compact" id="inspectBtn">Tra candidate graph</button></div>
+              <div id="inspectResult" class="result-note" aria-live="polite"></div>
+            </div>
+            <div class="output-pane"><div class="result-top"><span>OUTPUT / BIDIRECTIONAL</span><span id="conversionStatus" class="status">Chưa chạy</span></div>
+              <div class="data-block"><small>CVNSS4.0 V5</small><code id="cvssOutput">—</code></div>
+              <div class="data-block"><small>BASE27 → TRIT 0/1/2</small><code id="tritOutput" class="break-all">—</code></div>
+              <div class="data-block"><small>GIẢI MÃ VỀ TIẾNG VIỆT (CANONICAL)</small><code id="reverseOutput">—</code></div>
+              <div id="conversionDetails" class="details"></div>
+            </div>
+          </div>
+          <div class="symbol-wrap"><table class="symbol-table"><thead><tr><th>Ký hiệu</th><th>Chỉ số</th><th>3 trit (0,1,2)</th><th>Balanced (T,0,1)</th><th>Giá trị có dấu</th></tr></thead><tbody id="symbolRows"></tbody></table></div>
+        </div>
+
+        <div class="lab-panel" id="panel-packing" role="tabpanel" aria-labelledby="tab-packing" hidden>
+          <div class="panel-title"><h3>Đóng gói 5 trit trong 1 byte</h3><span class="local-badge">5 × LOG₂3 / 8 = 99,06%</span></div>
+          <p class="panel-lead">Mã <strong>T = −1, 0 = 0, 1 = +1</strong>. Mỗi nhóm 5 trit được xem như một số cơ số 3 từ 0 đến 242; giữ lại độ dài gốc để tháo gói chính xác.</p>
+          <div class="two-col">
+            <div class="input-pane"><label for="packInput">TRIT SEQUENCE (T / 0 / 1)</label><textarea id="packInput" rows="6" spellcheck="false">T01T1 100T0 T0T11 01T01</textarea><div class="inline-controls"><button class="button button-primary" id="packBtn">Đóng gói & giải nén</button></div><p class="hint">Các dấu cách và xuống dòng chỉ để đọc dễ hơn; không phải trit dữ liệu.</p></div>
+            <div class="output-pane"><div class="data-block"><small>PACKED BYTES · HEX</small><code id="packOutput" class="break-all">—</code></div><div class="data-block"><small>UNPACKED TRITS</small><code id="unpackOutput" class="break-all">—</code></div><div id="packMetrics" class="details"></div></div>
+          </div>
+          <div class="note tight"><b>Lưu trữ ≠ ALU:</b> đóng gói 5 trit/byte tối ưu dung lượng; truy cập và giải nén có chi phí. Phép cộng tam phân cần đặc tả đại số cụ thể (Z₃ hay cộng số nguyên có carry).</div>
+        </div>
+
+        <div class="lab-panel" id="panel-compiler" role="tabpanel" aria-labelledby="tab-compiler" hidden>
+          <div class="panel-title"><h3>BilaTiny typed subset → Pseudo‑ISA → VM</h3><span class="local-badge">COMPILER CHẠY TRỰC TIẾP</span></div>
+          <p class="panel-lead">Ngôn ngữ nhỏ để chứng minh pipeline: <code>trit</code>, <code>tadd()</code>, <code>tmul()</code>, <code>emit()</code>. Mã máy hiển thị là <b>bytecode minh họa 4 byte/lệnh</b>, không phải tập lệnh Xtensa hay mã tổng hợp FPGA.</p>
+          <div class="two-col">
+            <div class="input-pane"><label for="tinyInput">BILATINY PROGRAM</label><textarea id="tinyInput" rows="10" spellcheck="false">trit a = +1;
+trit b = -1;
+trit c = tadd(a, b);
+trit d = tmul(a, b);
+emit(c);
+emit(d);</textarea>
+              <div class="inline-controls"><button class="button button-primary" id="compileBtn">Biên dịch & thực thi</button><button class="textbutton" id="resetCodeBtn">Ví dụ khác ↻</button></div><p class="hint">Phép <code>tadd</code> là cộng modulo 3 trên tập {−1,0,+1}; <code>tmul</code> là nhân trit. Mỗi biến có thanh ghi riêng (tối đa 8).</p></div>
+            <div class="output-pane"><div class="data-block"><small>ASSEMBLY / TERNARY IR</small><pre id="asmOutput">—</pre></div><div class="data-block"><small>BYTECODE · HEX (BINARY HOST)</small><code id="bytecodeOutput" class="break-all">—</code></div><div class="data-block"><small>EXECUTION TRACE / REGISTERS</small><pre id="vmOutput">—</pre></div><div id="compilerStatus" class="details" aria-live="polite"></div></div>
+          </div>
+        </div>
+
+        <div class="lab-panel" id="panel-inference" role="tabpanel" aria-labelledby="tab-inference" hidden>
+          <div class="panel-title"><h3>FP32 → Ternary Weights → Sparse Inference</h3><span class="local-badge">SYNTHETIC · DETERMINISTIC</span></div>
+          <p class="panel-lead">Tạo ma trận <b>8 × 16</b> trọng số giả lập có seed cố định. Lượng tử hóa bằng ngưỡng và hệ số scale chung, so sánh phép nhân ma trận với kết quả FP32. <strong>Đây không phải mô hình TinyLLM đã huấn luyện.</strong></p>
+          <div class="threshold-box"><label for="thresholdInput">NGƯỠNG ĐƯA TRỌNG SỐ VỀ ZERO <strong id="thresholdValue">0,30</strong></label><input type="range" id="thresholdInput" min="0" max="1.2" step="0.05" value="0.3"><div class="range-labels"><span>Ít sparsity</span><span>Nhiều sparsity</span></div></div>
+          <div class="inline-controls"><button class="button button-primary" id="quantBtn">Tái tính toán</button><span class="muted">Seed: 20261110 · 128 trọng số</span></div>
+          <div class="quant-stats"><div><small>TRỌNG SỐ BẰNG 0</small><strong id="sparsityVal">—</strong></div><div><small>FP32 MODEL BYTES</small><strong id="floatBytes">—</strong></div><div><small>PACK5 WEIGHT BYTES</small><strong id="ternaryBytes">—</strong></div><div><small>MSE SO VỚI FP32</small><strong id="mseVal">—</strong></div></div>
+          <div class="chart-heading"><b>8 đầu ra · FP32 vs trit × scale</b><span><i class="legend-float"></i> FP32 <i class="legend-trit"></i> Trit</span></div>
+          <div id="quantBars" class="quant-bars" aria-label="So sánh kết quả nhân ma trận"></div>
+          <div class="note tight">Bộ nhớ chỉ tính trọng số (không gồm scale, activation, buffer, header). MSE là sai khác số học trong mẫu giả lập; không có số đo tốc độ, điện năng hoặc độ chính xác tác vụ.</div>
+        </div>
+
+        <div class="lab-panel" id="panel-device" role="tabpanel" aria-labelledby="tab-device" hidden>
+          <div class="panel-title"><h3>Phác thảo backend triển khai Edge AI</h3><span class="local-badge">CODE REFERENCE · NOT FLASHED</span></div>
+          <div class="two-col">
+            <div class="input-pane"><label for="targetSelect">CHỌN NỀN TẢNG</label><select id="targetSelect"><option value="esp">ESP32‑S3 / Xtensa · C reference</option><option value="fpga">FPGA / NHDL → VHDL‑2008</option><option value="browser">Browser / JavaScript reference VM</option></select>
+              <div class="target-card"><h4 id="targetTitle">ESP32‑S3</h4><p id="targetNotes">—</p></div>
+              <button class="button button-primary" id="manifestBtn">Tải manifest thí nghiệm (.json)</button><p class="hint">Manifest lưu cục bộ; không phải firmware .bin, bitstream .bit hay mô hình TinyLLM đã huấn luyện.</p>
+            </div>
+            <div class="output-pane"><div class="data-block"><small>MINIMAL REFERENCE KERNEL</small><pre id="targetCode">—</pre></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="test-strip"><div><strong>Reproducibility / Kiểm chứng</strong><p id="testSummary">Bộ kiểm thử trình duyệt chưa được chạy.</p></div><button id="testBtn" class="button button-ghost compact">Chạy self‑test toàn hệ</button></div>
+      <div id="testResults" class="test-results" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="section container" id="targets">
+      <div class="section-heading"><div><span class="kicker">03 / HARDWARE ADOPTION</span><h2>Lộ trình từ VM đến mạch thực</h2></div><p>Chỉ nâng trạng thái khi có log thực nghiệm và môi trường tái lập. Tránh biến kết quả mô phỏng thành tuyên bố về phần cứng.</p></div>
+      <div class="roadmap">
+        <article><span class="roadno">01</span><div class="roadhead"><h3>Browser / Node.js</h3><span class="roadstatus done">Đã triển khai mã</span></div><p>CVNSS v5, Base‑27, pack5, compiler BilaTiny và toán tử ma trận tam phân có kiểm thử tự động.</p><small>Đầu ra: trit stream · hex · trace · MSE</small></article>
+        <article><span class="roadno">02</span><div class="roadhead"><h3>ESP32‑S3</h3><span class="roadstatus pending">Chờ thử trên board</span></div><p>Đưa kernel C/Rust lên Xtensa, đo IRAM/PSRAM, số chu kỳ, độ trễ, năng lượng, và bộ nhớ trong các kích thước mô hình thực tế.</p><small>Đầu ra kỳ vọng: firmware + serial logs + benchmark</small></article>
+        <article><span class="roadno">03</span><div class="roadhead"><h3>FPGA / GHDL</h3><span class="roadstatus pending">Chờ tổng hợp</span></div><p>Biên dịch BilaTiny/NHDL thành VHDL‑2008, xây testbench đối chiếu golden vector và đo tài nguyên LUT/FF/DSP.</p><small>Đầu ra kỳ vọng: VHDL + testbench + timing report</small></article>
+        <article><span class="roadno">04</span><div class="roadhead"><h3>TinyLLM / BilaTiny AI</h3><span class="roadstatus pending">Đề xuất nghiên cứu</span></div><p>Huấn luyện trọng số tam phân tiếng Việt, lập manifest tokenizer, kiểm thử perplexity/accuracy và tái lập inference trên thiết bị.</p><small>Đầu ra kỳ vọng: checkpoint + model card + KPI</small></article>
+      </div>
+      <div class="small-cards"><div><b>IR có kiểu</b><span>Ràng buộc trit, shape, miền số, overflow trước khi sinh code.</span></div><div><b>Bit‑exact vectors</b><span>So sánh JS / C / RTL trên cùng tập dữ liệu.</span></div><div><b>Safety gate</b><span>Từ chối mã không hợp lệ; không tự động chạy mã tùy ý.</span></div></div>
+    </section>
+
+    <section class="section container" id="references">
+      <div class="section-heading"><div><span class="kicker">04 / OPEN SOURCE & RESEARCH</span><h2>Nguồn tham khảo & khả năng tái lập</h2></div><p>Liên kết tới dự án gốc, không sao chép ngầm mã có giấy phép khác. Phần thực thi của trang là reference độc lập, có kiểm thử và ghi rõ phạm vi.</p></div>
+      <div class="ref-grid">
+        <a href="https://github.com/theeteeshrimp/ternary-ecosystem" target="_blank" rel="noopener noreferrer"><small>PYTHON / BASELINE</small><b>Ternary Ecosystem</b><span>TriCPU · TriAsm · TriLang · TriOS trong kho gốc</span><em>↗</em></a>
+        <a href="https://github.com/SuperInstance/ternary-inference-sim" target="_blank" rel="noopener noreferrer"><small>RUST / INFERENCE</small><b>SuperInstance</b><span>TritPack 16/u32 · Z₃ · matvec, tham chiếu thuật toán</span><em>↗</em></a>
+        <a href="https://github.com/rfi-irfos/ternary-intelligence-stack" target="_blank" rel="noopener noreferrer"><small>RUST / SYSTEMS</small><b>Ternary Intelligence Stack</b><span>Ternlang · VM · sparse inference; lưu ý LGPL/BSL</span><em>↗</em></a>
+        <a href="https://github.com/rfi-irfos/rusty-penguin" target="_blank" rel="noopener noreferrer"><small>RUST / OPERATING SYSTEM</small><b>Rusty Penguin</b><span>Logic tam phân trên nền kernel x86‑64 nhị phân</span><em>↗</em></a>
+        <a href="https://github.com/trilang/trilang" target="_blank" rel="noopener noreferrer"><small>.NET / COMPILER</small><b>Trilang</b><span>Lexer · parser · semantic · IR bằng C#</span><em>↗</em></a>
+        <a href="https://hn.nuxt.dev/item/48912812" target="_blank" rel="noopener noreferrer"><small>DISCUSSION / PACKING</small><b>5 trits / 8 bits</b><span>Thảo luận thuật toán đóng gói, chi phí SIMD và lưu trữ</span><em>↗</em></a>
+        <a href="https://forum.osdev.org/viewtopic.php?p=354532" target="_blank" rel="noopener noreferrer"><small>FORUM / OSDEV</small><b>Machine code discussion</b><span>Tham khảo theo URL người dùng cung cấp; chưa xác minh nội dung</span><em>↗</em></a>
+        <a href="https://zenodo.org/records/21894461" target="_blank" rel="noopener noreferrer"><small>ARCHIVE / ZENODO</small><b>Research record</b><span>Tham khảo theo URL người dùng cung cấp; chưa xác minh nội dung</span><em>↗</em></a>
+      </div>
+      <div class="related"><span>PROJECT CONNECTIONS</span><a href="https://github.com/xulytiengviet/nhdl" target="_blank" rel="noopener noreferrer">NHDL ↗</a><a href="https://github.com/xulytiengviet/TinyLLM_Vietnamese" target="_blank" rel="noopener noreferrer">TinyLLM Vietnamese ↗</a><a href="https://github.com/xulytiengviet/Tinytrit" target="_blank" rel="noopener noreferrer">Tinytrit ↗</a><a href="https://github.com/xulytiengviet/morsetrit" target="_blank" rel="noopener noreferrer">MorseTrit ↗</a></div>
+    </section>
+  </main>
+  <footer><div class="container footer-inner"><div><b>△ TERNARY ECO</b><span>CVNSS4.0 · BilaTiny · Edge AI / Research Simulation</span></div><div>Long Ngo · 2026 · <a href="https://github.com/xulytiengviet/ternary-eco/blob/main/LICENSE">MIT (project)</a> · <a href="./REPRODUCIBILITY.md">Reproducibility</a></div></div></footer>
+</body>
+</html>

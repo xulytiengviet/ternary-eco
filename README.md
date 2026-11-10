@@ -1,5 +1,30 @@
 # 🔺 Ternary Computing Ecosystem
 
+## 🇻🇳 Ternary Eco Lab — CVNSS4.0 × BilaTiny × TinyLLM × Edge AI
+
+**Phòng thí nghiệm tương tác mới:** [docs/index.html](docs/index.html) · [Hướng dẫn tái lập](docs/REPRODUCIBILITY.md) · [Kiểm thử Node](tests/lab.test.cjs)
+
+Trang web bổ sung cho hệ thống Python bên dưới, không thay thế mã gốc. Mở trong trình duyệt để chạy:
+
+- **Vietnamese → CVNSS4.0 v5 audit-safe → Base27 → 3 trit/ký hiệu**, cùng candidate graph và chính sách giải mã canonical (56 nhóm nhập nhằng).
+- **Pack5:** 5 balanced trits/byte, giải nén lossless với metadata độ dài; đối chiếu biểu diễn 2-bit/trit.
+- **BilaTiny:** typed compiler subset gồm trit, tadd, tmul, emit; sinh pseudo-bytecode 4 byte/lệnh và chạy VM JavaScript 8 thanh ghi.
+- **TinyLLM weights:** phép thử lượng tử hóa ma trận giả lập, so sánh FP32/sparse trit và MSE có seed cố định.
+- **Targets:** ví dụ C cho ESP32-S3, ví dụ VHDL-2008 cho FPGA/NHDL và manifest xuất cục bộ; chưa có firmware/bitstream hoặc checkpoint AI đã huấn luyện.
+
+**Lưu ý khoa học:** Trạng thái trit ở đây được mô phỏng trên chip nhị phân; không suy diễn thành ISA tam phân vật lý. CVNSS4.0 là mã nhiều-một, vì vậy văn bản gốc không luôn tự động khôi phục 100% khi thiếu ngữ cảnh. Kết quả CI chỉ xác nhận thuật toán tham chiếu.
+
+### Quickstart
+
+    python -m http.server 8000
+
+Truy cập http://localhost:8000/docs/ và chạy `node --test tests/lab.test.cjs` để kiểm tra. Có thể triển khai GitHub Pages từ branch `main`, thư mục `/docs` trong Settings → Pages.
+
+**Nguồn tham khảo mở:** [Ternary Inference Sim](https://github.com/SuperInstance/ternary-inference-sim) · [TIS](https://github.com/rfi-irfos/ternary-intelligence-stack) · [Rusty Penguin](https://github.com/rfi-irfos/rusty-penguin) · [Trilang](https://github.com/trilang/trilang) · [ternary-ecosystem (upstream)](https://github.com/theeteeshrimp/ternary-ecosystem). Các repo bên ngoài được liên kết, không sao chép mã có giấy phép không tương thích.
+
+---
+
+
 > A complete balanced ternary computing stack — from CPU emulator to operating system.
 
 **Balanced ternary** is a non-standard numeral system that uses three digits: **-1 (T)**, **0**, and **+1**. Unlike binary (base-2), balanced ternary is naturally signed, has symmetric rounding, and can represent numbers more compactly. This project implements a full software ecosystem for a balanced ternary computer.

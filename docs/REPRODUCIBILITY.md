@@ -24,7 +24,7 @@ Mở http://localhost:8000/docs/ hoặc mở trực tiếp docs/index.html trên
 
     node --test tests/lab.test.cjs
 
-Bộ kiểm thử gồm 23 self-test của CVNSS v5, 27 trạng thái Base27, các chiều dài pack5 từ 0 đến 102, phép cộng và nhân Z3, compiler/VM và phép thử lượng tử hóa tái lập. GitHub Actions chạy cùng câu lệnh này khi mã docs/tests thay đổi.
+Bộ kiểm thử gồm 23 self-test của CVNSS v5, 27 trạng thái Base27, các chiều dài pack5 từ 0 đến 102, phép cộng và nhân Z3, compiler/VM và phép thử lượng tử hóa tái lập. GitHub Actions còn biên dịch C11 host test và chạy golden testbench VHDL-2008 bằng GHDL; kiểm tra này KHÔNG thay thế đo phần cứng thực.
 
 Các ví dụ chạy riêng mã Python nền (KHÔNG phải engine mà trang web gọi):
 
@@ -43,6 +43,8 @@ Các lệnh Python thuộc dự án gốc, chưa nằm trong Node CI.
 3. Pack5 lưu năm trit cân bằng/byte với quy tắc padding trit 0 phía phải; cần lưu độ dài trước padding. Mục tiêu là mã hóa dữ liệu chứ không phải lệnh ALU.
 4. BilaTiny demo có lệnh SET/TADD/TMUL/EMIT/HALT, opcode 4 byte/lệnh do dự án xác định. TADD là cộng modulo 3 và không phải cộng số nguyên có carry. Pseudo-ISA này không đồng nhất với TriCPU Python hoặc ISA Xtensa.
 5. Inference sử dụng đầu vào và trọng số nhân tạo có seed cố định, ngưỡng, scale chung, MSE và số byte trọng số; không suy ra độ chính xác mô hình, hiệu suất thiết bị hoặc tiết kiệm điện.
+
+Chi tiết mã phần cứng tham khảo và câu lệnh GHDL: [hardware/README.md](../hardware/README.md).
 
 ## 5. Các cổng kiểm chứng phần cứng và AI
 
@@ -65,4 +67,4 @@ TinyLLM/BilaTiny: cần tokenizer và corpus tiếng Việt có provenance, chec
 
 ## 7. Diễn giải đúng CI
 
-CI xanh chỉ chứng minh thuật toán tham chiếu trong môi trường Node.js phù hợp với các ca kiểm thử. CI xanh không chứng minh chip tam phân vật lý, firmware ESP32-S3, FPGA đã chạy, hoặc TinyLLM thực được huấn luyện. Ngưỡng tái lập 98% (nếu áp dụng) phải có chỉ số, bộ dữ liệu đóng băng và chuẩn so sánh độc lập.
+CI xanh chứng minh thuật toán JavaScript, C11 trên host và testbench VHDL trong mô phỏng phù hợp với các ca kiểm thử. CI xanh không chứng minh chip tam phân vật lý, firmware ESP32-S3, FPGA đã chạy, hoặc TinyLLM thực được huấn luyện. Ngưỡng tái lập 98% (nếu áp dụng) phải có chỉ số, bộ dữ liệu đóng băng và chuẩn so sánh độc lập.

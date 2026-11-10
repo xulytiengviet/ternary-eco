@@ -21,5 +21,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Check browser JavaScript syntax
+        run: |
+          node --check docs/app.js
+          node --check docs/core.js
+          node --check docs/assets/cvnss-converter.js
       - name: Self-check CVNSS and reference ternary VM
         run: node --test tests/lab.test.cjs

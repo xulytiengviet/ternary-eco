@@ -29,7 +29,7 @@ int ternary_unpack5(const uint8_t *bytes, size_t nbytes, size_t ntrits,
         if (byte > 242u) return -1;
         int8_t digits[5];
         for (int j = 4; j >= 0; --j) {
-            digits[j] = (int8_t)((byte % 3u) - 1u);
+            digits[j] = (int8_t)((int)(byte % 3u) - 1);
             byte /= 3u;
         }
         for (size_t j = 0; j < 5u; ++j) {
